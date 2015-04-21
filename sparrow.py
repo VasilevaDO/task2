@@ -1,6 +1,6 @@
 
 # Parametrs
-Time = 0.1  # in seconds
+Time = 1  # in seconds
 M = 8
 P = 4
 N = 8
@@ -99,18 +99,19 @@ class Sparrow(threading.Thread):
         while True:
             try:
                 data = obj.dataQueue.get(block=False)
-                #print(obj.Id,'       ',data,obj.now_eats,obj.dataQueue.qsize(),obj.number_of_breadcrumbs)
+                print(obj)
                 if obj.now_eats  is not obj.Id:
                     with obj.mutex:
                         obj.number_of_breadcrumbs += 1
                         obj.status = 3
                         #print(obj.Id,'       ',data,obj.now_eats,obj.dataQueue.qsize(),obj.number_of_breadcrumbs)
                         obj.now_eats[0] = obj.Id
-                        # print(obj)
+                        print(obj)
                 if obj.number_of_breadcrumbs == obj.P:
                     obj.flew_away()
-                    # print(obj)
+                    print(obj)
                     break
+                obj.status = 1
             except queue.Empty:
                 pass
 
